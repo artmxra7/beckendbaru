@@ -21,8 +21,7 @@ class PaymentRepository
       
         $params = [ 
             'external_id' => $order_code,
-            // 'payer_email' => $user->email,
-            'payer_email' => 'artmxarea@gmail.com',
+            'payer_email' => $user->email,
             'description' => 'Tagihan Pembayaran Pesanan '.$amount_order->membership_nama,
             'should_send_email' => true,
             // 'payment_methods'=>[$request->payment_method],
