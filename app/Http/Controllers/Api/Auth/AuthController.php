@@ -250,6 +250,7 @@ class AuthController extends ApiController
             } catch(\Tymon\JWTAuth\Exceptions\JWTException $e){
             }
         }
+        
 
         $affected = DB::update("update customers set token = '$userToken' where phone = ? and otp = ?", [$request->phone,$request->otp]);
         // return $this->respondWithToken($userToken);
@@ -288,11 +289,14 @@ class AuthController extends ApiController
             }
         }
 
+        // nama var yang di insert $userToken, tapi yang di return $token
+        // $token null saat pertama login, soalnya belum generate
+
         $affected = DB::update("update partners set token = '$userToken' where phone = ? and otp = ?", [$request->phone,$request->otp]);
         // return $this->respondWithToken($userToken);
         return response()->json([
             'status' => 'success',
-            'access_token' => $token,
+            'access_token' => $userToken,
             'token_type' => 'bearer',
             'data' => $p_id
         ], 200);
